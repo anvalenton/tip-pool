@@ -17,26 +17,27 @@ describe('Servers test (with setup and tear-down)', function() {
 		serverTbody.deleteRow(0);
 		let serverId = 0;
 		delete allServers.server1;
+		serverNameInput.value = '';
 	});
 });
 
-describe('Servers test for updateServerTable func', function() {
+describe('testing only updateServerTable', function() {
 	beforeEach(function() {
+		// initialization logic
+		allServers['server2'] = 'Becky';
+		allServers['server3'] = 'Tricia';
 		let serverTbody = document.querySelector('#serverTable tbody');
 	});
 
 	it('should test updateServerTable function', function() {
-		var allServers = { server1: 'Jake', server2: 'Melissa', server3: 'Karen' };
-		tipAmt = 100;
-		updateServerTable(allServers);
-		console.log(allServers);
-		console.log(serverTbody.rows.length);
-		expect(serverTbody.rows.length).toEqual(3);
+		updateServerTable();
+		expect(serverTbody.rows.length).toEqual(2);
 	});
 
 	afterAll(function() {
-		//serverTbody.deleteRow(0);
-		//serverTbody.deleteRow(-1);
-		//serverTbody.deleteRow(2);
+		serverTbody.deleteRow(-1);
+		serverTbody.deleteRow(-1);
+		delete allServers.server2;
+		delete allServers.server3;
 	});
 });

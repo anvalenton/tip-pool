@@ -8,6 +8,7 @@ let serverId = 0;
 
 //once serverform is submitted  do function submitServerInfo
 serverForm.addEventListener('submit', submitServerInfo);
+serverTbody.addEventListener('click', deleteRow);
 
 // create server object and add to allServers, update html and reset input
 //
@@ -35,12 +36,11 @@ function submitServerInfo(evt) {
 function updateServerTable() {
 	//set server table body to empty
 	serverTbody.innerHTML = '';
-	console.log('im inside updateservertable');
 	//for all the elements in allServers object
 	for (let key in allServers) {
 		//assign the new servername from allServers object to curServer
 		let curServer = allServers[key];
-		console.log('im inside the loop');
+
 		//create new table row
 		let newTr = document.createElement('tr');
 		newTr.setAttribute('id', key);
@@ -51,6 +51,7 @@ function updateServerTable() {
 		// add server name and tip average to table body
 		appendTd(newTr, curServer.serverName);
 		appendTd(newTr, '$' + tipAverage.toFixed(2));
+		appendDeleteBtn(newTr);
 
 		// add row to server table body
 		serverTbody.append(newTr);
